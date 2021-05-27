@@ -32,8 +32,14 @@ level_dict = {'首页': '1', '基础配置': '2', '系统管理': '3', '会员�
        }
 
 # 打开浏览器
-def open_browser(url):
-    driver = webdriver.Chrome()
+def open_Chorme(url):
+    driver = webdriver.Chorme()
+    driver.implicitly_wait(5)
+    driver.get(url)
+    return driver
+
+def open_Firefox(url):
+    driver = webdriver.Firefox()
     driver.implicitly_wait(5)
     driver.get(url)
     return driver
