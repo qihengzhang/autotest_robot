@@ -42,6 +42,7 @@ def open_Firefox(url):
     driver = webdriver.Firefox()
     driver.implicitly_wait(5)
     driver.get(url)
+
     return driver
 
 # 登录

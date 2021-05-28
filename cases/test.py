@@ -2,6 +2,7 @@ from lib.general import *
 from lib.BasicConfiguration.tax_config import *
 from hyrobot.common import *
 from lib.BasicConfiguration.ApproveConfiguration import *
+from lib.BasicConfiguration.Role import *
 import time
 
 
@@ -17,15 +18,17 @@ class autotest:
         login(testing, 'mayday5', 'may111111')
         time.sleep(2)
 
+
         STEP(3, '进入目录')
         one = directory_One(testing, '基础配置')
         time.sleep(1)
-        two = directory_Two(one, '审批流程配置')
+        two = directory_Two(one, '路线管理')
         time.sleep(1)
         #directory_Three(two, '柜组管理')
         #timesleep(2)
         #new_tax(testing, '1231231', '碍事法师', '碍事法师')
-        three = activity(testing, '审批流程配置')
-        activity(three, '采购员')
+        #activity(testing, "活动审核",'采购')
+        edit_role(testing, "上海", "北京", "1", "1", "1" )
+
 
 
