@@ -1,4 +1,6 @@
 from selenium import webdriver
+from hyrobot.sql_config import menu, tuple_to_str
+from hyrobot.sql_config import ConnectSqlLite
 import time
 
 level_dict = {'首页': '1', '基础配置': '2', '系统管理': '3', '会员管理': '4', '首营管理': '5',
@@ -30,6 +32,8 @@ level_dict = {'首页': '1', '基础配置': '2', '系统管理': '3', '会员�
         '收货单': '1', '验货单': '2', '入库单': '3',
         '退仓-收货单': '1', '退仓-验货单': '2', '退仓-入库单': '3',
        }
+conn = ConnectSqlLite.connect('data.sqllite')
+cur = conn.cursor()
 
 # 打开浏览器
 def open_browser(url):
@@ -54,10 +58,13 @@ def register(driver, username, password):
 
 # 打开一级目录
 def directory_One(driver, OneLevel):
+    data = menu.select_menu(cur, OneLevel)
+    num = tuple_to_str(data)
+    print(num)
     try:
         if OneLevel is not None:
             driver.find_element_by_css_selector(
-                ".menu > div > div > div > ul > li:nth-child(" + level_dict[OneLevel] + ")").click()
+                ".menu > div > div > div > ul > li:nth-child(" + num + ")").click()
         return driver.find_element_by_css_selector(".menu > div > div > div > ul > li:nth-child(" + level_dict[OneLevel] + ")")
 
     except Exception:
@@ -65,11 +72,12 @@ def directory_One(driver, OneLevel):
 
 # 打开二级目录
 def directory_Two(one, TwoLevel):
+    data = menu.select_menu(cur, TwoLevel)
+    num = tuple_to_str(data)
+    print(num)
     try:
         if TwoLevel is not None:
-            print(level_dict[TwoLevel])
-            one.find_element_by_css_selector("ul > li:nth-child(" + level_dict[TwoLevel] + ")").click()
-
+            one.find_element_by_css_selector("ul > li:nth-child(" + num + ")").click()
         # return one.find_element_by_css_selector("ul > li:nth-child(" + level_dict[TwoLevel] + ")")
         return level_dict[TwoLevel]
     except Exception:
@@ -79,8 +87,10 @@ def directory_Two(one, TwoLevel):
 def directory_Three(two, ThreeLevel):
     try:
         if ThreeLevel is not None:
+            data = menu.select_menu(cur, ThreeLevel)
+            num = tuple_to_str(data)
             two.find_element_by_css_selector(
-                "ul > li:nth-child(" + level_dict[ThreeLevel] + ")").click()
+                "ul > li:nth-child(" + num + ")").click()
 
     except Exception:
         print('内容不匹配，请输入正确的三级目录')
