@@ -4,14 +4,14 @@ import sqlite3
 class ConnectSqlLite:
 
     @staticmethod
-    def connect(sql_data):
-        conn = sqlite3.connect(sql_data)
+    def connect():
+        conn = sqlite3.connect('./hyrobot/data.sqlite')
         return conn
 
-    @staticmethod
-    def conn_cur():
-        cur = ConnectSqlLite.connect().cursor()
-        return cur
+    # @staticmethod
+    # def conn_cur():
+    #     cur = ConnectSqlLite.connect().cursor()
+    #     return cur
 
     @staticmethod
     def close_sql():
@@ -62,19 +62,19 @@ class menu:
     @staticmethod
     def delete_menu(name, num):
         sql = ""
-        ConnectSqlLite.conn_cur().execute(sql, (name, num))
+        ConnectSqlLite.connect().cursor().execute(sql, (name, num))
         ConnectSqlLite.connect().commit()
 
     @staticmethod
     def update_menu(name, num):
         sql = ""
-        ConnectSqlLite.conn_cur().execute(sql, (name, num))
+        ConnectSqlLite.connect().cursor().execute(sql, (name, num))
         ConnectSqlLite.connect().commit()
 
     @staticmethod
     def select_menu(name):
         sql = "select menu_num from menu where menu_name = '" + name + "'"
-        re = ConnectSqlLite.conn_cur().execute(sql)
+        re = ConnectSqlLite.connect().cursor().execute(sql)
         return re.fetchall()
 
 
@@ -84,6 +84,6 @@ def tuple_to_str(data_info):
 
 if __name__ == '__main__':
     print('启动')
-    # data = menu.select_menu('首页')
-    # a = tuple_to_str(data)
-    # print(type(a))
+    data = menu.select_menu('首页')
+    a = tuple_to_str(data)
+    print(type(a), a)
