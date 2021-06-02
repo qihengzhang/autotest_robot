@@ -3,6 +3,7 @@ from lib.BasicConfiguration.tax_config import *
 from hyrobot.common import *
 from lib.BasicConfiguration.ApproveConfiguration import *
 from lib.BasicConfiguration.Role import role
+# ==========================================
 import time
 
 
@@ -24,11 +25,5 @@ class autotest:
         time.sleep(1)
         two = directory_Two(one, '路线管理')
         time.sleep(1)
-        #directory_Three(two, '柜组管理')
-        #timesleep(2)
-        #new_tax(testing, '1231231', '碍事法师', '碍事法师')
-        #activity(testing, "活动审核",'采购')
-        role.edit(testing, "上海", "北京", "1", "1", "1" )
-
 
 
