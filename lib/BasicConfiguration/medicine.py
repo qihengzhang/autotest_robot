@@ -1,13 +1,7 @@
 from selenium import webdriver
 import time
 
-# 打开浏览器
-def open_browser(url):
-    driver = webdriver.Chrome()
-    driver.implicitly_wait(5)
-    driver.get(url)
-    driver.find_element_by_css_selector()
-    return driver
+
 
 # 新增门店
 def info_medicine(driver, province, city, district):
