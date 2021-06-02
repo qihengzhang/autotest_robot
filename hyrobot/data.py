@@ -1,6 +1,4 @@
 from hyrobot.sql_config import menu
-import sqlite3
-import time
 
 
 level_dict = {'首页': '1', '基础配置': '2', '系统管理': '3', '会员管理': '4', '首营管理': '5',
@@ -32,14 +30,9 @@ level_dict = {'首页': '1', '基础配置': '2', '系统管理': '3', '会员�
         '收货单': '1', '验货单': '2', '入库单': '3',
         '退仓-收货单': '1', '退仓-验货单': '2', '退仓-入库单': '3'}
 
-conn = sqlite3.connect('data.sqlite')
-cur = conn.cursor()
 sql = "INSERT INTO menu (menu_name, menu_num) VALUES (?,?);"
+menu.insert_menu()
 for key in level_dict:
-    cur.execute(sql, (key, level_dict[key]))
-    conn.commit()
+    menu.insert_menu(key, level_dict[key])
     print(key + ',' + '提交成功！！！')
 
-conn.close()
-
-print(len(level_dict))

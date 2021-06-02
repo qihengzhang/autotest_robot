@@ -1,5 +1,6 @@
 from lib.general import *
 from hyrobot.common import *
+
 import time
 
 class autotest:
@@ -19,6 +20,6 @@ class autotest:
         two = directory_Two(one, '仓储配置')
         print(two)
         time.sleep(1)
-        directory_Three(two, '柜组管理')
+        directory_Three(two, '货架管理')
         time.sleep(2)
 
