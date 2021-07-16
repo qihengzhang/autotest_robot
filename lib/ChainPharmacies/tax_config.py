@@ -1,8 +1,6 @@
 from selenium import webdriver
 import time
 
-
-
 def new_tax(driver, tax_no, drawer, reviewer):
     driver.find_element_by_css_selector(".btns-qj > div > button").click()
     time.sleep(1)

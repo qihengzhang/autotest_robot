@@ -19,10 +19,11 @@ class ConnectSqlLite:
         ConnectSqlLite.connect().close()
 
     @staticmethod
-    def create_table():
+    def create_table(sql):
         sql = "create table if not exists area(id integer primary key, name text, num integer)"
-        sql = "create table if not exists menu(id integer primary key, menu_name text, menu_num integer)"
-        ConnectSqlLite.conn_cur().execute(sql)
+        # sql = "create table if not exists menu(id integer primary key, menu_name text, menu_num integer)"
+        ConnectSqlLite.connect().cursor().execute(sql)
+        ConnectSqlLite.connect().commit()
 
 # area表
 class area:
@@ -30,19 +31,19 @@ class area:
     @staticmethod
     def insert_area(area_name, area_num):
         sql = "insert into area (name ,num) values (?,?);"
-        ConnectSqlLite.conn_cur()().execute(sql, (area_name, area_num))
+        ConnectSqlLite.connect().cursor().execute(sql, (area_name, area_num))
         ConnectSqlLite.connect()().commit()
 
     @staticmethod
     def delete_area(sql):
         # sql = "delete from area where name = ? or num = ?;"
-        ConnectSqlLite.conn_cur().execute(sql)
+        ConnectSqlLite.connect().cursor().execute(sql)
         ConnectSqlLite.connect().commit()
 
     @staticmethod
     def update_area(area_name, area_num):
         sql = "update area set name = ?, num = ?;"
-        ConnectSqlLite.conn_cur().execute(sql, (area_name, area_num))
+        ConnectSqlLite.connect().cursor().execute(sql, (area_name, area_num))
         ConnectSqlLite.connect().commit()
 
     @staticmethod

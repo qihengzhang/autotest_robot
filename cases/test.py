@@ -1,8 +1,6 @@
-from lib.general import *
-from lib.BasicConfiguration.tax_config import *
 from hyrobot.common import *
-from lib.BasicConfiguration.ApproveConfiguration import *
-from lib.BasicConfiguration.Role import role
+from lib.IndependentPharmacies.general import *
+from lib.IndependentPharmacies.CompanyExchange import *
 # ==========================================
 import time
 
@@ -12,18 +10,25 @@ class autotest:
 
     def teststeps(self):
         STEP(1, '打开网址')
-        testing = open_Firefox("https://test.91medicine.net/pharmacy-system/#/login")
+        # testing = open_Firefox("https://test.91medicine.net/pharmacy-system/#/login")
         # testing = open_Chorme("https://test.91medicine.net/pharmacy-system/#/login")
+        # testing = open_Chorme("https://test-store-single.91medicine.net/singledrugstore/#/login")
+        testing = open_Firefox("https://test-store-single.91medicine.net/singledrugstore/#/login")
 
         STEP(2, '登录')
-        login(testing, 'mayday5', 'may111111')
+        login(testing, 'zhang001', '123456a')
         time.sleep(2)
 
+        STEP(3, '打开供应商首营')
+        open_company(testing)
 
-        STEP(3, '进入目录')
-        one = directory_One(testing, '基础配置')
-        time.sleep(1)
-        two = directory_Two(one, '路线管理')
-        time.sleep(1)
+        STEP(4, '添加供应商首营')
+        add_company(testing)
 
+        data = {"供应商名称": "123", "供应商类别": "生产企业", "注册日期": "2021-07-01", "地址": "1",
+                "法定代表人": "1", "助记码": "1", "开户行": "1", "银行账户": "1", "开户户名": "1",
+                "企业负责人": "1", "质量负责人": "1", "联系电话": "1", "邮箱": "1", "邮政编码": "1", }
 
+        scope = ["非处方药"]
+
+        info_basic(testing, data, scope)
