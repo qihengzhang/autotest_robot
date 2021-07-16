@@ -128,20 +128,35 @@ def info_basic(driver, data: dict, Scope: list) -> dict:
                                             + ScopeBusiness[Scope[i]] + ")").click()
         time.sleep(1)
 
+def pull_button(driver):
+    driver.find_element_by_css_selector("div.person > button").click()
+    time.sleep(1)
 
-def info_personnel(driver, data: dict) -> dict:
+def info_personnel(driver, data):
     """
-    data = { "姓名":"", "身份证号码":"", "身份证有效期": "", "手机号码": ""}
+    data = [
+    {"姓名": "", "身份证号码": "", "身份证有效期": "", "手机号码": ""},
+    {"姓名": "", "身份证号码": "", "身份证有效期": "", "手机号码": ""},
+    {"姓名": "", "身份证号码": "", "身份证有效期": "", "手机号码": ""}
+]
     """
+    person_num = driver.find_element_by_css_selector("div.person > div")
+    print(type(person_num))
+    print(person_num.size())
+    for i in range(0, person_num):
+        num = str(i+3)
+        driver.find_element_by_css_selector("div.person > div:nth-child(" + num + ")"
+        ">form > div:nth-child(1) > div:nth-child(1) > div > div > div > input").send_keys(data[i]["姓名"])
+        time.sleep(1)
 
-    driver.find_element_by_css_selector("").send_keys(data["姓名"])
-    time.sleep(1)
+        driver.find_element_by_css_selector("div.person > div:nth-child(" + num + ") "
+        ">form > div:nth-child(1) > div:nth-child(2) > div > div > div > input").send_keys(data[i]["身份证号码"])
+        time.sleep(1)
 
-    driver.find_element_by_css_selector("").send_keys(data["身份证号码"])
-    time.sleep(1)
+        driver.find_element_by_css_selector("div.person > div:nth-child(" + num + ") "
+        ">form > div:nth-child(1) > div:nth-child(3) > div > div > div > input").send_keys(data[i]["身份证有效期"])
+        time.sleep(1)
 
-    driver.find_element_by_css_selector("").send_keys(data["身份证有效期"])
-    time.sleep(1)
-
-    driver.find_element_by_css_selector("").send_keys(data["手机号"])
-    time.sleep(1)
+        driver.find_element_by_css_selector("div.person > div:nth-child(" + num + ") "
+        ">form > div:nth-child(2) > div:nth-child(1) > div > div > div > input").send_keys(data[i]["手机号"])
+        time.sleep(1)
